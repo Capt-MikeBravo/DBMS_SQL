@@ -101,4 +101,3 @@ from sales s
 join people p
 on p.SPID=s.SPID;
 
-
