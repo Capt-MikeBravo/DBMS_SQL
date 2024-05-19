@@ -101,3 +101,91 @@ from sales s
 join people p
 on p.SPID=s.SPID;
 
+#left Join
+select s.SaleDate,s.Amount,pr.Product from
+sales s
+left join products pr
+on pr.PID=s.PID;
+
+select p.Salesperson, s.SaleDate,s.Amount,pr.Product,p.Team from
+sales s
+join people p
+on p.SPID=s.SPID
+join products pr
+on pr.PID=s.PID;#multijoin
+
+select p.Salesperson, s.SaleDate,s.Amount,pr.Product,p.Team from
+sales s
+join people p
+on p.SPID=s.SPID
+join products pr
+on pr.PID=s.PID
+where s.Amount<100;
+
+select p.Salesperson, s.SaleDate,s.Amount,pr.Product,p.Team from
+sales s
+join people p
+on p.SPID=s.SPID
+join products pr
+on pr.PID=s.PID
+where s.Amount<100
+and p.Team='Delish';
+
+select p.Salesperson, s.SaleDate,s.Amount,pr.Product,p.Team from
+sales s
+join people p
+on p.SPID=s.SPID
+join products pr
+on pr.PID=s.PID
+where s.Amount<100
+and p.Team='';
+
+select p.Salesperson, s.SaleDate,s.Amount,pr.Product,p.Team,g.geoID from
+sales s
+join people p
+on p.SPID=s.SPID
+join products pr
+on pr.PID=s.PID
+join geo g
+on g.GeoID=s.GeoID
+where s.Amount<500
+and p.Team=''
+and g.Geo in ('India','New Zealand'); # why geoid and geo location giving differnt result
+
+
+# SELECT p.Salesperson, s.SaleDate, s.Amount, pr.Product, p.Team
+# FROM sales s
+# JOIN people p ON p.SPID = s.SPID
+# JOIN products pr ON pr.PID = s.PID
+# WHERE s.Amount < 100
+# GROUP BY p.Salesperson, s.SaleDate, s.Amount, pr.Product, p.Team
+# ORDER BY s.Amount;#didn't understand
+#
+# SELECT p.Salesperson, SUM(s.Amount) AS TotalSales
+# FROM sales s
+# JOIN people p ON p.SPID = s.SPID
+# JOIN products pr ON pr.PID = s.PID
+# where s.Amount<100 and p.Team='Delish'
+# GROUP BY p.Salesperson
+# ORDER BY TotalSales DESC;
+#
+# SELECT p.Salesperson, s.SaleDate, s.Amount, pr.Product, p.Team
+# FROM sales s
+# JOIN people p ON p.SPID = s.SPID
+# JOIN products pr ON pr.PID = s.PID
+# WHERE s.Amount < 100
+#   AND p.Team = 'Delish'
+#   AND p.SPID IN (
+#       SELECT s.SPID
+#       FROM sales s
+#       WHERE s.Amount < 100
+#       GROUP BY s.SPID
+#       HAVING COUNT(s.SPID) > 1
+#   );
+
+
+
+
+
+
+
