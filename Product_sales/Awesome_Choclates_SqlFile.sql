@@ -183,9 +183,23 @@ and g.Geo in ('India','New Zealand'); # why geoid and geo location giving differ
 #       HAVING COUNT(s.SPID) > 1
 #   );
 
+#GROUP BY HAVING
 
+select GeoID,sum(amount),avg(Amount),sum(Boxes),avg(Boxes)
+from sales
+group by GeoID;
 
+select s.GeoID,sum(amount),avg(Amount),sum(Boxes),avg(Boxes)
+from sales s
+join geo g
+on s.GeoID=g.GeoID
+group by s.GeoID;
 
+select g.Geo,sum(amount),avg(Amount),sum(Boxes),avg(Boxes)
+from sales s
+join geo g
+on s.GeoID=g.GeoID
+group by g.Geo;
 
 
 
